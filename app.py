@@ -1,5 +1,6 @@
 import pandas as pd
 from datetime import datetime
+from collections import deque, OrderedDict
 
 # Replace 'path_to_csv_file' with the actual path to your CSV file
 file_path = 'C:/Users/weiha/Documents/UPC/Programación/hackupc/hackupc-travelperk-dataset.csv'
@@ -100,7 +101,7 @@ def overlap_places(trip_id):
     
     
 def gustos(trip_id):
-    coin = {}
+    coin = OrderedDict()
     llista = overlap_places(trip_id)
     
     for gustos in eval(df.iloc[trip_id,6]):
@@ -109,24 +110,24 @@ def gustos(trip_id):
             numero_conincidencias = 0
             
             if gustos in eval(df.iloc[j,6]):
-                coin[j] = 0
+                coin.update({j: 0})
                 for i in range(len(eval(df.iloc[trip_id,6]))):
                     for k in range(len(eval(df.iloc[j,6]))):
                         if eval(df.iloc[trip_id,6])[i] == eval(df.iloc[j,6])[k]:
                             numero_conincidencias += 1
                 
-                coin[j] = numero_conincidencias
+                coin.update({j: numero_conincidencias})
     
-    sort_coin = dict(sorted(coin.items(), key=lambda x: x[1], reverse=True))
+    sort_coin = deque(sorted(coin.items(), key=lambda x: x[1]))
     
     return sort_coin
 
-print(gustos(2))
+print(gustos(1))
 
 def presupost(trip_id):
-    presu = {key: [value, df.iloc[key-1,7]] for key, value in gustos(trip_id).items()}
-    sorted_presu = dict(sorted(presu.items(), key=lambda item: (item[1][0], -abs(item[1][1] - df.iloc[trip_id-1,7])), reverse=True))
+    presu = OrderedDict({key: [df.iloc[key-1,1],value, df.iloc[key-1,7]] for key, value in gustos(trip_id)})
+    sorted_presu = deque(sorted(presu.items(), key=lambda item: (item[1][0], -abs(item[1][1] - df.iloc[trip_id-1,7]))))
     return sorted_presu
 
 print(presupost(2))
-        
+
