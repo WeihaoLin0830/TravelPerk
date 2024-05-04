@@ -29,3 +29,12 @@ llista_de_gustos = ["Cultura","Aire lliure","Història","Compres","Ciència","Fa
 no_reps = len(set(llista))
 
 print(no_reps)"""
+"""
+for i in range(len(df)):
+    if df.iloc[i,4] == df.iloc[i,5]:
+        print(i)
+        print(df.iloc[i,4])
+        print(df.iloc[i,5])
+        df.drop(i)
+    df.to_csv(file_path, index=False)
+"""  

@@ -7,8 +7,9 @@
 
 function set_chat_height() {
 
-  var chat_height = screen.height - document.getElementById("bottom_bar").offsetHeight - 60;
+  var chat_height = screen.height - document.getElementById("bottom_bar").offsetHeight;
 document.getElementById("chat_iframe").style.height = chat_height + "px";
+alert("hello");
 
 }
 
@@ -34,8 +35,6 @@ function register_step(number) {
         user_name = document.getElementById("register_name").value;
         user_location = document.getElementById("register_location").value;
 
-        if (user_name && user_location) {
-
         document.getElementById("register_image").style.display = "none";
 
         document.getElementById("register_header").innerHTML = "Què t'agrada?";
@@ -45,35 +44,12 @@ function register_step(number) {
         document.getElementById("register_form_1").style.display = "none";
         document.getElementById("register_form_2").style.display = "block";
 
-        }
-
-        else {
-
-            show_error();
-
-        }
-
     }
 
     else if (number == 1) {
 
-        if (selected_interests.length > 0) {
-
         document.getElementById("register").style.display = "none";
-
-        // Save user data to display on profile open
-        // TODO
-
-
         document.getElementById("location_search").style.display = "block";
-        document.getElementById("bottom_bar").style.display = "block";
-
-        }
-
-        else {
-
-            show_error();
-        }
 
     }
     
@@ -264,174 +240,10 @@ function select_destination(destination) {
 }
 
 
-var date_start = "";
-var date_end = "";
-
 function save_dates() {
 
-    date_start = document.getElementById("date_start").value;
-    date_end = document.getElementById("date_end").value;
-
-    if (date_start && date_end) {
-
-        document.getElementById("date_selector").style.display = "none";
-        document.getElementById("budget_selector").style.display = "block";
-
-    }
-
-    else {
-
-        show_error();
-    }
-
-
-}
-
-
-var currency = "";
-var budget = 0;
-
-function select_currency(text) {
-
-    document.getElementById("selected_currency").innerHTML = text;
-
-    document.getElementById("money_usd").style.display = "none";
-    document.getElementById("money_eur").style.display = "none";
-    document.getElementById("money_cad").style.display = "none";
-    document.getElementById("money_gbp").style.display = "none";
-    
-    if (text == "USD") {
-
-        document.getElementById("money_usd").style.display = "block";
-    }
-
-    else if (text == "EUR") {
-
-        document.getElementById("money_eur").style.display = "block";
-
-
-    }
-
-    else if (text == "CAD") {
-
-        document.getElementById("money_cad").style.display = "block";
-
-    }
-
-    else if (text == "GBP") {
-
-        document.getElementById("money_gbp").style.display = "block";
-
-
-    }
-}
-
-
-function save_budget() {
-
-    budget = document.getElementById("budget_input").value;
-
-    if (budget) {
-
-        // WEB REQUEST TO FLASK
-        // Finish travel plan, send to people
-
-        // Show people skeleton loader
-        document.getElementById("budget_selector").style.display = "none";
-        document.getElementById("loader_screen").style.display = "block";
-        
-    }
-
-    else {
-
-        show_error();
-    }
-
-}
-
-
-// DATA SENDING
-
-/*
-
-user_name = "";
-user_location = "";
-selected_interests = [];
-
-trip_destination = "";
-budget
-currency
-
-date_start
-date_end
-
-*/
-
-
-// Bottom bar navigation
-
-function bottom_bar(page) {
-
-    // Show header
-    document.getElementById("header").style.display = "flex";
-    
-    // Hide all screens
     document.getElementById("date_selector").style.display = "none";
-    document.getElementById("budget_selector").style.display = "none";
-    document.getElementById("location_search").style.display = "none";
-    document.getElementById("places_recommender").style.display = "none";
-    document.getElementById("individual_place").style.display = "none";
-    document.getElementById("chat_screen").style.display = "none";
-    document.getElementById("profile_screen").style.display = "none";
-    document.getElementById("loader_screen").style.display = "none";
-    document.getElementById("tinder").style.display = "none";
-
-
-    if (page == "home") {
-
-        document.getElementById("location_search").style.display = "block";
-
-    }
-
-    else if (page == "landmarks") {
-
-        document.getElementById("places_recommender").style.display = "block";
-
-    }
-
-    else if (page == "love") {
-
-        document.getElementById("tinder").style.display = "flex";
-        
-    }
-
-    else if (page == "chat") {
-
-        document.getElementById("header").style.display = "none";
-        document.getElementById("chat_screen").style.display = "block";
-        
-    }
-
-    else if (page == "profile") {
-
-        document.getElementById("profile_screen").style.display = "block";
-        
-    }
-
-}
-
-
-
-function show_error() {
-
-    document.getElementById("error_alert").style.display = "block";
-
-    setTimeout(function() {
-
-        document.getElementById("error_alert").style.display = "none";
-
-    }, 3000);
-    
+    document.getElementById("budget_selector").style.display = "block";
 }
 
 
