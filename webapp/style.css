@@ -1,0 +1,98 @@
+body {
+    font-family: "Poppins";
+}
+
+.screen {
+
+    padding-left: 30px;
+    padding-right: 30px;
+}
+
+/* Register */
+
+.reg_row {
+  display: flex;
+  justify-content: center;
+}
+
+.reg_opt {
+
+  width: 100%;
+  margin-left: 5px;
+  margin-right: 5px;
+
+}
+
+/* Location search */
+
+.city_button {
+
+  width: 100%;
+}
+
+
+/* Others */
+
+.event_card {
+  background-color: #ffffff;
+  border-radius: 10px;
+  width: 100%;
+  border: 1px solid lightgray;
+  padding-bottom: 5px;
+}
+
+.image_container {
+  position: relative;
+}
+
+.event_image {
+  border-radius: 5px 5px 0px 0px;
+  width: 100%;
+}
+
+.event_category_chip {
+  color: white;
+  position: absolute;
+  bottom: 10px;
+  left: 10px;
+  background-color: rgba(255, 255, 255, 0.23);
+  padding: 3px;
+  padding-left: 8px;
+  padding-right: 8px;
+  border-radius: 20px;
+  width: max-content;
+  height: max-content;
+  font-size: 12px;
+  white-space: nowrap;
+}
+
+.event_users {
+  position: absolute;
+  bottom: -10px;
+  right: 10px;
+}
+
+.event_details {
+  padding-left: 15px;
+}
+
+.event_title {
+  font-size: 20px;
+  margin-bottom: 5px;
+  margin-top: 15px;
+}
+
+.event_date,
+.event_hour {
+  color: gray;
+  font-size: 11px;
+  display: inline-block;
+  margin-bottom: 10px;
+}
+
+.time_icon,
+.date_icon {
+  color: gray;
+  font-size: 16px;
+  vertical-align: middle;
+}
