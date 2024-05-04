@@ -144,6 +144,8 @@ def presupost(trip_id):
 def newgroup():
 
     id = request.args.get("id")
+    print(int(id))
+    print(str(df.iloc[int(id)-1]))
     print(str(presupost(int(id))))
 
     return str(presupost(int(id)))
