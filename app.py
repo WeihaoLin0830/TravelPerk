@@ -134,22 +134,22 @@ def gustos(trip_id):
 #print(gustos(2))
 
 def presupost(trip_id):
-    presu = {key: [df.iloc[key-1,1],value, df.iloc[key-1,7]] for key, value in gustos(trip_id).items()}
+    presu = {key: [df.iloc[key-1,1],value, df.iloc[key-1,7], max(df.iloc[trip_id,2],df.iloc[key,2]), min(df.iloc[trip_id,3],df.iloc[key,3])] for key, value in gustos(trip_id).items()}
     sorted_presu = dict(sorted(presu.items(), key=lambda item: (item[1][1], -abs(item[1][2] - df.iloc[trip_id-1,7])), reverse=True))
     return sorted_presu
 
-#print(presupost(2))
+print(presupost(2))
 
-@app.route('/compatible', methods=['GET'])
-def newgroup():
+# @app.route('/compatible', methods=['GET'])
+# def newgroup():
 
-    id = request.args.get("id")
-    print(int(id))
-    print(str(df.iloc[int(id)-1]))
-    print(str(presupost(int(id))))
+#     id = request.args.get("id")
+#     print(int(id))
+#     print(str(df.iloc[int(id)-1]))
+#     print(str(presupost(int(id))))
 
-    return str(presupost(int(id)))
+#     return str(presupost(int(id)))
 
 
-if __name__ == "__main__":
-    app.run()
+# if __name__ == "__main__":
+#     app.run()
