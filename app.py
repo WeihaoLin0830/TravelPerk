@@ -56,7 +56,7 @@ def overlap_fecha(trip_id):
 
 
 # Ejemplo
-print(overlap_fecha(1))
+#print(overlap_fecha(1))
 
 """
 def ciutats(trip_id):
@@ -155,9 +155,29 @@ def overlap_places(trip_id, llista_fechas):
     return overlap_list + total_overlap_list
     
 # Ejemplo
-print(df.iloc[0,1])
-print(overlap_fecha(1))
-print(overlap_places(1,overlap_fecha(1)))
+#print(df.iloc[0,1])
+#print(overlap_fecha(1))
+#print(overlap_places(1,overlap_fecha(1)))
 
-def gustos(trip_id,likes):
-    pass
+def gustos(trip_id):
+    coincidencias = []
+    lst_num_coin = []
+    llista = overlap_places(trip_id,overlap_fecha(trip_id))
+    
+    for gustos in eval(df.iloc[trip_id,6]):
+        for j in llista:
+            
+            numero_conincidencias = 0
+            
+            if gustos in eval(df.iloc[j,6]):
+                coincidencias.append(j)
+                for i in range(len(eval(df.iloc[trip_id,6]))):
+                    for k in range(len(eval(df.iloc[j,6]))):
+                        if eval(df.iloc[trip_id,6])[i] == eval(df.iloc[j,6])[k]:
+                            numero_conincidencias += 1
+                
+                lst_num_coin.append(numero_conincidencias)
+   
+    return coincidencias, lst_num_coin                   
+                    
+print(gustos(1))
