@@ -27,7 +27,7 @@
 </nav>
 
 
-<div id="register" class="screen" style="display:;padding-left: 40px;padding-right: 40px;">
+<div id="register" class="screen" style="padding-left: 40px;padding-right: 40px;">
 
 
     <img id="register_image" src="./src/account.png" style="display: block;margin-left: auto;margin-right: auto;margin-top: 50px;width: 100px;">
@@ -39,25 +39,25 @@
 
     <div id="register_form_2" style="display:none;margin-top: 30px;">
 
+ 
+        <button onclick="add_interest(0);" id="interest_0" type="button" class="reg_opt py-2.5 px-5 me-2 mb-2 font-medium text-gray-900 text-center items-center p-3 text-center font-bold text-gray-900 rounded-lg bg-gray-50 hover:bg-gray-100 group hover:shadow  dark:bg-gray-600 dark:hover:bg-gray-500 dark:text-white focus:z-10 focus:ring-4 focus:ring-gray-100">Cultura 📖</button>
 
-        <button onclick="add_interest(0);" id="interest_0" type="button" class="reg_opt py-2.5 px-5 me-2 mb-2 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-full border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">Cultura 📖</button>
+        <button onclick="add_interest(1);" id="interest_1" type="button" class="reg_opt py-2.5 px-5 me-2 mb-2 font-medium text-gray-900 text-center items-center p-3 text-center font-bold text-gray-900 rounded-lg bg-gray-50 hover:bg-gray-100 group hover:shadow  dark:bg-gray-600 dark:hover:bg-gray-500 dark:text-white focus:z-10 focus:ring-4 focus:ring-gray-100">Aire lliure 🌞</button>
 
-        <button onclick="add_interest(1);" id="interest_1" type="button" class="reg_opt py-2.5 px-5 me-2 mb-2 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-full border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">Aire lliure 🌞</button>
+        <button onclick="add_interest(2);" id="interest_2" type="button" class="reg_opt py-2.5 px-5 me-2 mb-2 font-medium text-gray-900 text-center items-center p-3 text-center font-bold text-gray-900 rounded-lg bg-gray-50 hover:bg-gray-100 group hover:shadow  dark:bg-gray-600 dark:hover:bg-gray-500 dark:text-white focus:z-10 focus:ring-4 focus:ring-gray-100">Història 📜</button>
 
-        <button onclick="add_interest(2);" id="interest_2" type="button" class="reg_opt py-2.5 px-5 me-2 mb-2 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-full border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">Història 📜</button>
+        <button onclick="add_interest(3);" id="interest_3" type="button" class="reg_opt py-2.5 px-5 me-2 mb-2 font-medium text-gray-900 text-center items-center p-3 text-center font-bold text-gray-900 rounded-lg bg-gray-50 hover:bg-gray-100 group hover:shadow  dark:bg-gray-600 dark:hover:bg-gray-500 dark:text-white focus:z-10 focus:ring-4 focus:ring-gray-100">Compres 👜</button>
 
-        <button onclick="add_interest(3);" id="interest_3" type="button" class="reg_opt py-2.5 px-5 me-2 mb-2 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-full border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">Compres 👜</button>
+        <button onclick="add_interest(4);" id="interest_4" type="button" class="reg_opt py-2.5 px-5 me-2 mb-2 font-medium text-gray-900 text-center items-center p-3 text-center font-bold text-gray-900 rounded-lg bg-gray-50 hover:bg-gray-100 group hover:shadow  dark:bg-gray-600 dark:hover:bg-gray-500 dark:text-white focus:z-10 focus:ring-4 focus:ring-gray-100">Ciència 🧪</button>
 
-        <button onclick="add_interest(4);" id="interest_4" type="button" class="reg_opt py-2.5 px-5 me-2 mb-2 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-full border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">Ciència 🧪</button>
+        <button onclick="add_interest(5);" id="interest_5" type="button" class="reg_opt py-2.5 px-5 me-2 mb-2 font-medium text-gray-900 text-center items-center p-3 text-center font-bold text-gray-900 rounded-lg bg-gray-50 hover:bg-gray-100 group hover:shadow  dark:bg-gray-600 dark:hover:bg-gray-500 dark:text-white focus:z-10 focus:ring-4 focus:ring-gray-100">Familiar 👪</button>
 
-        <button onclick="add_interest(5);" id="interest_5" type="button" class="reg_opt py-2.5 px-5 me-2 mb-2 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-full border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">Familiar 👪</button>
+        <button onclick="add_interest(6);" id="interest_6" type="button" class="reg_opt py-2.5 px-5 me-2 mb-2 font-medium text-gray-900 text-center items-center p-3 text-center font-bold text-gray-900 rounded-lg bg-gray-50 hover:bg-gray-100 group hover:shadow  dark:bg-gray-600 dark:hover:bg-gray-500 dark:text-white focus:z-10 focus:ring-4 focus:ring-gray-100">Relax ✨</button>
 
-        <button onclick="add_interest(6);" id="interest_6" type="button" class="reg_opt py-2.5 px-5 me-2 mb-2 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-full border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">Relax ✨</button>
-
-        <button onclick="add_interest(7);" id="interest_7" type="button" class="reg_opt py-2.5 px-5 me-2 mb-2 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-full border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">Festa 🎉</button>
+        <button onclick="add_interest(7);" id="interest_7" type="button" class="reg_opt py-2.5 px-5 me-2 mb-2 font-medium text-gray-900 text-center items-center p-3 text-center font-bold text-gray-900 rounded-lg bg-gray-50 hover:bg-gray-100 group hover:shadow  dark:bg-gray-600 dark:hover:bg-gray-500 dark:text-white focus:z-10 focus:ring-4 focus:ring-gray-100">Festa 🎉</button>
 
 
-        <button onclick="register_step(1);" style="margin-top: 20px;" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Guardar preferències</button>
+        <button onclick="register_step(1);" style="margin-top: 20px;" class="bg-gradient-to-br from-pink-500 to-orange-400 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-pink-200 dark:focus:ring-pink-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2 text-white">Guardar preferències</button>
 
 
     </div>
@@ -65,14 +65,14 @@
     <form id="register_form_1" class="max-w-sm mx-auto" style="margin-top: 40px;">
         <div class="mb-5">
           <label for="name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">El teu nom</label>
-          <input type="name" id="register_name" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Carles Porta" required />
+          <input type="name" id="register_name" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-orange-600 focus:border-orange-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-orange-600 dark:focus:border-orange-600" placeholder="Carles Porta" required />
         </div>
         <div class="mb-5">
           <label for="location" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">La teva ubicació</label>
-          <input type="text" id="register_location" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Barcelona" required />
+          <input type="text" id="register_location" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-orange-600 focus:border-orange-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-orange-600 dark:focus:border-orange-600" placeholder="Barcelona" required />
         </div>
 
-        <button onclick="register_step(0);" style="margin-top: 20px;" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Continuar</button>
+        <button onclick="register_step(0);" style="margin-top: 20px;" class="bg-gradient-to-br from-pink-500 to-orange-400 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-pink-200 dark:focus:ring-pink-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2 text-white">Continuar</button>
 
       </form>
       
@@ -101,7 +101,7 @@
             <path d="M20 4a2 2 0 0 0-2-2h-2V1a1 1 0 0 0-2 0v1h-3V1a1 1 0 0 0-2 0v1H6V1a1 1 0 0 0-2 0v1H2a2 2 0 0 0-2 2v2h20V4ZM0 18a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8H0v10Zm5-8h10a1 1 0 0 1 0 2H5a1 1 0 0 1 0-2Z"/>
           </svg>
       </div>
-      <input name="start" type="text" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Data d'inici">
+      <input name="start" type="text" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-orange-600 focus:border-orange-600 block w-full ps-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-orange-600 dark:focus:border-orange-600" placeholder="Data d'inici">
     </div>
 
     <div class="relative" style="margin-top: 20px;">
@@ -110,11 +110,11 @@
             <path d="M20 4a2 2 0 0 0-2-2h-2V1a1 1 0 0 0-2 0v1h-3V1a1 1 0 0 0-2 0v1H6V1a1 1 0 0 0-2 0v1H2a2 2 0 0 0-2 2v2h20V4ZM0 18a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8H0v10Zm5-8h10a1 1 0 0 1 0 2H5a1 1 0 0 1 0-2Z"/>
           </svg>
       </div>
-      <input name="end" type="text" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Data de tornada">
+      <input name="end" type="text" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-orange-600 focus:border-orange-600 block w-full ps-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-orange-600 dark:focus:border-orange-600" placeholder="Data de tornada">
   </div>
   </div>
 
-  <button onclick="save_dates();" style="margin-top: 20px;" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Continuar</button>
+  <button onclick="save_dates();" style="margin-top: 20px;" class="bg-gradient-to-br from-pink-500 to-orange-400 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-pink-200 dark:focus:ring-pink-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2 text-white">Continuar</button>
 
   
 </div>
@@ -140,7 +140,7 @@
           <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 2a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1v8a1 1 0 0 1-1 1M2 5h12a1 1 0 0 1 1 1v8a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1Zm8 5a2 2 0 1 1-4 0 2 2 0 0 1 4 0Z"/>
       </svg>
       </div>
-      <input type="number" id="currency-input" class="block p-2.5 w-full z-20 ps-10 text-sm text-gray-900 bg-gray-50 rounded-s-lg border-e-gray-50 border-e-2 border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-e-gray-700  dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:border-blue-500" placeholder="Escull la quantitat" required />
+      <input type="number" id="currency-input" class="block p-2.5 w-full z-20 ps-10 text-sm text-gray-900 bg-gray-50 rounded-s-lg border-e-gray-50 border-e-2 border border-gray-300 focus:ring-orange-600 focus:border-orange-600 dark:bg-gray-700 dark:border-e-gray-700  dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:border-orange-600" placeholder="Escull la quantitat" required />
   </div>
   <button id="dropdown-currency-button" data-dropdown-toggle="dropdown-currency" class="flex-shrink-0 z-10 inline-flex items-center py-2.5 px-4 text-sm font-medium text-center text-gray-900 bg-gray-100 border border-gray-300 rounded-e-lg hover:bg-gray-200 focus:ring-4 focus:outline-none focus:ring-gray-100 dark:bg-gray-700 dark:hover:bg-gray-600 dark:focus:ring-gray-700 dark:text-white dark:border-gray-600" type="button">
       <svg fill="none" aria-hidden="true" class="h-4 w-4 me-2" viewBox="0 0 20 15"><rect width="19.6" height="14" y=".5" fill="#fff" rx="2"/><mask id="a" style="mask-type:luminance" width="20" height="15" x="0" y="0" maskUnits="userSpaceOnUse"><rect width="19.6" height="14" y=".5" fill="#fff" rx="2"/></mask><g mask="url(#a)"><path fill="#D02F44" fill-rule="evenodd" d="M19.6.5H0v.933h19.6V.5zm0 1.867H0V3.3h19.6v-.933zM0 4.233h19.6v.934H0v-.934zM19.6 6.1H0v.933h19.6V6.1zM0 7.967h19.6V8.9H0v-.933zm19.6 1.866H0v.934h19.6v-.934zM0 11.7h19.6v.933H0V11.7zm19.6 1.867H0v.933h19.6v-.933z" clip-rule="evenodd"/><path fill="#46467F" d="M0 .5h8.4v6.533H0z"/><g filter="url(#filter0_d_343_121520)"><path fill="url(#paint0_linear_343_121520)" fill-rule="evenodd" d="M1.867 1.9a.467.467 0 11-.934 0 .467.467 0 01.934 0zm1.866 0a.467.467 0 11-.933 0 .467.467 0 01.933 0zm1.4.467a.467.467 0 100-.934.467.467 0 000 .934zM7.467 1.9a.467.467 0 11-.934 0 .467.467 0 01.934 0zM2.333 3.3a.467.467 0 100-.933.467.467 0 000 .933zm2.334-.467a.467.467 0 11-.934 0 .467.467 0 01.934 0zm1.4.467a.467.467 0 100-.933.467.467 0 000 .933zm1.4.467a.467.467 0 11-.934 0 .467.467 0 01.934 0zm-2.334.466a.467.467 0 100-.933.467.467 0 000 .933zm-1.4-.466a.467.467 0 11-.933 0 .467.467 0 01.933 0zM1.4 4.233a.467.467 0 100-.933.467.467 0 000 .933zm1.4.467a.467.467 0 11-.933 0 .467.467 0 01.933 0zm1.4.467a.467.467 0 100-.934.467.467 0 000 .934zM6.533 4.7a.467.467 0 11-.933 0 .467.467 0 01.933 0zM7 6.1a.467.467 0 100-.933.467.467 0 000 .933zm-1.4-.467a.467.467 0 11-.933 0 .467.467 0 01.933 0zM3.267 6.1a.467.467 0 100-.933.467.467 0 000 .933zm-1.4-.467a.467.467 0 11-.934 0 .467.467 0 01.934 0z" clip-rule="evenodd"/></g></g><defs><linearGradient id="paint0_linear_343_121520" x1=".933" x2=".933" y1="1.433" y2="6.1" gradientUnits="userSpaceOnUse"><stop stop-color="#fff"/><stop offset="1" stop-color="#F0F0F0"/></linearGradient><filter id="filter0_d_343_121520" width="6.533" height="5.667" x=".933" y="1.433" color-interpolation-filters="sRGB" filterUnits="userSpaceOnUse"><feFlood flood-opacity="0" result="BackgroundImageFix"/><feColorMatrix in="SourceAlpha" result="hardAlpha" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"/><feOffset dy="1"/><feColorMatrix values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.06 0"/><feBlend in2="BackgroundImageFix" result="effect1_dropShadow_343_121520"/><feBlend in="SourceGraphic" in2="effect1_dropShadow_343_121520" result="shape"/></filter></defs></svg>
@@ -185,7 +185,7 @@
 </form>
 
 
-  <button onclick="save_dates();" style="margin-top: 20px;" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Continuar</button>
+  <button onclick="save_dates();" style="margin-top: 20px;" class="bg-gradient-to-br from-pink-500 to-orange-400 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-pink-200 dark:focus:ring-pink-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2 text-white">Continuar</button>
 
   
 </div>
@@ -201,7 +201,7 @@
           <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z" />
         </svg>
       </div>
-      <input type="search" id="city_search" class="block w-full p-4 pl-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Quin és el teu destí?" required>
+      <input type="search" id="city_search" class="block w-full p-4 pl-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-orange-600 focus:border-orange-600 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-orange-600 dark:focus:border-orange-600" placeholder="Quin és el teu destí?" required>
 
     </div>
   </form>

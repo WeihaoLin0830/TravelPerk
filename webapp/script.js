@@ -45,11 +45,11 @@ function add_interest(number) {
 
         selected_interests.splice(selected_interests.indexOf(number), 1);
 
-        document.getElementById("interest_" + number.toString()).style.backgroundColor = "white";
+        document.getElementById("interest_" + number.toString()).style.backgroundColor = "rgb(243 244 246)";
 
-        document.getElementById("interest_" + number.toString()).style.color = "rgb(17 24 39/var(--tw-text-opacity))";
+        document.getElementById("interest_" + number.toString()).style.color = "rgb(234 88 12/var(--tw-text-opacity))";
 
-
+        
     }
 
     else {
