@@ -100,8 +100,7 @@ def overlap_places(trip_id):
     
     
 def gustos(trip_id):
-    coincidencias = []
-    lst_num_coin = []
+    coin = {}
     llista = overlap_places(trip_id)
     
     for gustos in eval(df.iloc[trip_id,6]):
@@ -110,14 +109,16 @@ def gustos(trip_id):
             numero_conincidencias = 0
             
             if gustos in eval(df.iloc[j,6]):
-                coincidencias.append(j)
+                coin[j] = 0
                 for i in range(len(eval(df.iloc[trip_id,6]))):
                     for k in range(len(eval(df.iloc[j,6]))):
                         if eval(df.iloc[trip_id,6])[i] == eval(df.iloc[j,6])[k]:
                             numero_conincidencias += 1
                 
-                lst_num_coin.append(numero_conincidencias)
-   
-    return coincidencias, lst_num_coin                   
-                    
+                coin[j] = numero_conincidencias
+    
+    sort_coin = dict(sorted(coin.items(), key=lambda x: x[1], reverse=True))
+    
+    return sort_coin
+
 print(gustos(1))
