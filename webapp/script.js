@@ -51,7 +51,7 @@ function add_interest(number) {
 
         selected_interests.splice(selected_interests.indexOf(number), 1);
 
-        document.getElementById("interest_" + number.toString()).style.backgroundColor = "white";
+        document.getElementById("interest_" + number.toString()).style.backgroundColor = "rgb(249 250 251/var(--tw-bg-opacity))";
 
         document.getElementById("interest_" + number.toString()).style.color = "rgb(17 24 39/var(--tw-text-opacity))";
 
@@ -235,12 +235,20 @@ function save_dates() {
 }
 
 
+function moneda(tipus){
+
+  
+  var icone = document.getElementById("dropdown-currency-button");
+  
+  icone.innerHTML = '';
+
+return 0}
+
 'use strict';
 
 var tinderContainer = document.querySelector('.tinder');
 var allCards = document.querySelectorAll('.tinder--card');
-var nope = document.getElementById('nope');
-var love = document.getElementById('love');
+
 
 function initCards(card, index) {
   var newCards = document.querySelectorAll('.tinder--card:not(.removed)');
@@ -329,6 +337,3 @@ function createButtonListener(love) {
 
 var nopeListener = createButtonListener(false);
 var loveListener = createButtonListener(true);
-
-nope.addEventListener('click', nopeListener);
-love.addEventListener('click', loveListener);
