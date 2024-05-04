@@ -2,6 +2,8 @@ import pandas as pd
 from datetime import datetime
 from flask import Flask, request
 import cgitb
+from collections import deque, OrderedDict
+
 cgitb.enable()
 print("Content-type: text/html\n\n")
 import sys
@@ -130,14 +132,14 @@ def gustos(trip_id):
     
     return sort_coin
 
-#print(gustos(2))
+print(gustos(2))
 
 def presupost(trip_id):
     presu = OrderedDict({key: [df.iloc[key-1,1],value, df.iloc[key-1,7]] for key, value in gustos(trip_id)})
     sorted_presu = deque(sorted(presu.items(), key=lambda item: (item[1][1], -abs(item[1][2] - df.iloc[trip_id-1,7]))))
     return sorted_presu
 
-#print(presupost(2))
+print(presupost(2))
         
 
 @app.route('/compatible', methods=['GET'])
@@ -151,4 +153,3 @@ def newgroup():
 
 if __name__ == "__main__":
     app.run()
-    
