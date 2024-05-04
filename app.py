@@ -106,7 +106,7 @@ def overlap_fecha(id_name):
         # Check if the two ranges overlap
         return max(start1, start2) <= min(end1, end2), start1 == start2 and end1 == end2
     
-    for i in range(1,len(df)):
+    for i in range(1,len(df)+1):
         if i != id_name:
             parcial, total = coincide(i)
 
