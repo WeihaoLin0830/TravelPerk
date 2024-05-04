@@ -83,26 +83,29 @@ def overlap_places(trip_id):
     
 
     def coincide(other):
-
+    
         start1 = df.iloc[trip_id-1,4]
         end1 = df.iloc[trip_id-1,5]
 
         start2 = df.iloc[other-1,4]
         end2 = df.iloc[other-1,5]
+        
+        if start1 != end1 and start2 != end2:
+            return end1 == end2 #balgase la redundancia por vaga
 
-        return start1 == start2 or start1 == end2 or end1 == start2 or end1 == end2, start1 == start2 or end1 == end2 #balgase la redundancia por vaga
-
+        else:
+            return False
 
     for i in llista_t:
         if i != trip_id:
-            parcial, total = coincide(i)
+            total = coincide(i)
 
             if total:
                 total_overlap_list.append(df.iloc[i-1,0])
 
     for n in llista_p:
         if n != trip_id:
-            parcial, total = coincide(n)
+            parcial = coincide(n)
 
             if parcial:
                 overlap_list.append(df.iloc[n-1,0])
@@ -110,7 +113,7 @@ def overlap_places(trip_id):
     return overlap_list + total_overlap_list
     
     
-def gustos(trip_id):
+def coins(trip_id):
     coin = {}
     llista = overlap_places(trip_id)
     
@@ -129,13 +132,10 @@ def gustos(trip_id):
     
     sort_coin = dict(sorted(coin.items(), key=lambda x: x[1], reverse=True))
     
-    return sort_coin
-
-
-def presupost(trip_id):
-    presu = {key: [df.iloc[key-1,1],value, df.iloc[key-1,7]] for key, value in gustos(trip_id).items()}
-    sorted_presu = dict(sorted(presu.items(), key=lambda item: (item[1][1], -abs(item[1][2] - df.iloc[trip_id-1,7])), reverse=True))
-    return sorted_presu
+    presu = {key: [df.iloc[key-1,1],value, df.iloc[key-1,7]] for key, value in sort_coin.items()}
+    sorted_presu_coin = dict(sorted(presu.items(), key=lambda item: (item[1][1], -abs(item[1][2] - df.iloc[trip_id-1,7])), reverse=True))
+    
+    return sorted_presu_coin
 
 
 def dies_coin(trip_id):
@@ -163,21 +163,22 @@ def dies_coin(trip_id):
         
         if start1 >= start2:
             if end1 <= end2:
-                llista_dies_coins.append([df.iloc[ids-1,1], start1.strftime("%d/%m/%Y"), end1.strftime("%d/%m/%Y")])
+                llista_dies_coins.append([df.iloc[ids-1,0], df.iloc[ids-1,1], start1.strftime("%d/%m/%Y"), end1.strftime("%d/%m/%Y")])
             
             elif end1 > end2:
-                llista_dies_coins.append([df.iloc[ids-1,1], start1.strftime("%d/%m/%Y"), end2.strftime("%d/%m/%Y")])
+                llista_dies_coins.append([df.iloc[ids-1,0], df.iloc[ids-1,1], start1.strftime("%d/%m/%Y"), end2.strftime("%d/%m/%Y")])
             
             
         elif start1 < start2:
             if end1 <= end2:
-                llista_dies_coins.append([df.iloc[ids-1,1], start2.strftime("%d/%m/%Y"), end1.strftime("%d/%m/%Y")])
+                llista_dies_coins.append([df.iloc[ids-1,0], df.iloc[ids-1,1], start2.strftime("%d/%m/%Y"), end1.strftime("%d/%m/%Y")])
             
             elif end1 > end2:
-                llista_dies_coins.append([df.iloc[ids-1,1], start2.strftime("%d/%m/%Y"), end2.strftime("%d/%m/%Y")])
+                llista_dies_coins.append([df.iloc[ids-1,0], df.iloc[ids-1,1], start2.strftime("%d/%m/%Y"), end2.strftime("%d/%m/%Y")])
                 
     return llista_dies_coins
-        
+
+print(coins(1))
 print(dies_coin(1))
 
 """@app.route('/compatible', methods=['GET'])
