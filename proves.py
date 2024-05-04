@@ -19,4 +19,9 @@ llista_de_gustos = ["Cultura","Aire lliure","Història","Compres","Ciència","Fa
     df.iloc[i,6] = str(likes)
     df.to_csv(file_path, index=False)"""
 
+for i in range(len(df)):
+    gust_rand = random.choice(range(0,250))
+    df.iloc[i,7] = gust_rand
+    df.to_csv(file_path, index=False)
+
 print(eval(df.iloc[6,6]))
