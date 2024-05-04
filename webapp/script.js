@@ -45,28 +45,37 @@ function add_interest(number) {
 
         selected_interests.splice(selected_interests.indexOf(number), 1);
 
-        document.getElementById("interest_" + number.toString()).style.backgroundColor = "rgb(249 250 251/var(--tw-text-opacity))";
+        document.getElementById("interest_" + number.toString()).style.backgroundColor = "white";
 
         document.getElementById("interest_" + number.toString()).style.color = "rgb(17 24 39/var(--tw-text-opacity))";
 
-        
+
     }
 
     else {
 
-        selected_interests.push(number);
+      selected_interests.push(number);
 
-        document.getElementById("interest_" + number.toString()).style.backgroundColor = "rgb(243 244 246/var(--tw-bg-opacity))";
+      document.getElementById("interest_" + number.toString()).style.backgroundColor = "rgb(243 244 246/var(--tw-bg-opacity))";
 
-        document.getElementById("interest_" + number.toString()).style.color = "rgb(234 88 12/var(--tw-text-opacity))";
+      document.getElementById("interest_" + number.toString()).style.color = "rgb(234 88 12/var(--tw-text-opacity))";
 
-    }
+  }
 
 }
 
 
 
 // Location search
+
+document.getElementById('city_search').addEventListener('input', function() {
+  var inputValue = this.value.trim(); // Trim whitespace
+  if (inputValue.length > 3) {
+      // Call your function here
+      search_token = document.getElementById("city_search").value;
+      token_amadeus();
+  }
+});
 
 var search_token = "";
 
@@ -168,6 +177,9 @@ fetch(url, {
 // Dynamically add city selection buttons to the page
 function create_location_cards(cities) {
 
+  // Erease previous cards
+  document.getElementById("city_search_results").innerHTML = "";
+
     for (var element of cities) {
 
         var name = element["name"];
@@ -175,7 +187,9 @@ function create_location_cards(cities) {
         var code = element["iataCode"];
 
         var card = `
-        <button onclick="select_destination('${name}');" type="button" id="${name}" class="city_button py-2.5 px-5 me-2 mb-2 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-full border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">${name}</button>
+        <div onclick="select_destination('${name}');" class="flex items-center p-3 text-base font-bold text-gray-900 rounded-lg bg-gray-50 hover:bg-gray-100 group hover:shadow dark:bg-gray-600 dark:hover:bg-gray-500 dark:text-white" style="margin-top:15px">
+        <img class="flag_icon" src="https://flagsapi.com/${state}/flat/32.png">
+        <span class="flex-1 ms-3 whitespace-nowrap">${name}</span>
         </div>
         `;
 
