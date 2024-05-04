@@ -16,66 +16,10 @@ def afegir():
     departure_city = input("Ciutat de partida: ")
     arrival_city = input("Ciutat que viatge: ")
     likes = [like.strip() for like in input("Gustos (separats amb coma): ").split(',')]
-    new_row = {'Trip ID': len(df)+1, 'Traveller Name': traveller_name, 'Departure Date': departure_date, 'Return Date': return_date, 'Departure City': departure_city, 'Arrival City': arrival_city, 'Likes': likes}
+    budget = input("El presupost que disposa: ")
+    new_row = {'Trip ID': len(df)+1, 'Traveller Name': traveller_name, 'Departure Date': departure_date, 'Return Date': return_date, 'Departure City': departure_city, 'Arrival City': arrival_city, 'Likes': likes, 'Budget': budget}
     df = df._append(new_row, ignore_index=True)
     df.to_csv(file_path, index=False)
-    
-#print(df.iloc[len(df)-1,1])
-
-def overlap_fecha(trip_id):
-
-    overlap_list = []
-
-    def coincide(other):
-
-        start1 = df.iloc[trip_id-1,2]
-        end1 = df.iloc[trip_id-1,3]
-
-        start2 = df.iloc[other-1,2]
-        end2 = df.iloc[other-1,3]
-        
-        # Convert string dates to datetime objects if inputs are strings
-        if isinstance(start1, str):
-            start1 = datetime.strptime(start1, "%d/%m/%Y")
-        if isinstance(end1, str):
-            end1 = datetime.strptime(end1, "%d/%m/%Y")
-        if isinstance(start2, str):
-            start2 = datetime.strptime(start2, "%d/%m/%Y")
-        if isinstance(end2, str):
-            end2 = datetime.strptime(end2, "%d/%m/%Y")
-
-        # Check if the two ranges overlap
-        return max(start1, start2) <= min(end1, end2)
-    
-    for i in range(1,len(df)):
-        if i != trip_id:
-            if coincide(i):
-                overlap_list.append(df.iloc[i-1,0])
-                
-    return overlap_list
-
-
-# Ejemplo
-#print(overlap_fecha(1))
-
-"""
-def ciutats(trip_id):
-    
-    overlap_list = []
-    
-    for i in range(len(df)):
-        
-        if i != trip_id:
-            for j in range(4,6):
-                
-                if df.iloc[trip_id,4] == df.iloc[i,j] or df.iloc[trip_id,5] == df.iloc[i,j]:
-                    
-                    overlap_list.append(df.iloc[i,0])
-                    
-    return overlap_list
-
-print(ciutats(0))
-"""
 
 
 def overlap_fecha(trip_id):
@@ -119,11 +63,11 @@ def overlap_fecha(trip_id):
                 
     return overlap_list, total_overlap_list
 
-def overlap_places(trip_id, llista_fechas):
+def overlap_places(trip_id):
 
     overlap_list = []
     total_overlap_list =  []
-
+    llista_fechas = overlap_fecha(trip_id)
     llista_p, llista_t = llista_fechas
     
 
@@ -154,15 +98,11 @@ def overlap_places(trip_id, llista_fechas):
                 
     return overlap_list + total_overlap_list
     
-# Ejemplo
-#print(df.iloc[0,1])
-#print(overlap_fecha(1))
-#print(overlap_places(1,overlap_fecha(1)))
-
+    
 def gustos(trip_id):
     coincidencias = []
     lst_num_coin = []
-    llista = overlap_places(trip_id,overlap_fecha(trip_id))
+    llista = overlap_places(trip_id)
     
     for gustos in eval(df.iloc[trip_id,6]):
         for j in llista:
