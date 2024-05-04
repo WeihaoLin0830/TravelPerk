@@ -7,7 +7,7 @@ def read_api_key(file_path):
 
 client = Groq(
 # Lee la API key del archivo
-  api_key = read_api_key("C:/Users/weiha/Documents/API_KEY.txt")
+  api_key = "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"
 )
 
 lloc = "Londres"
