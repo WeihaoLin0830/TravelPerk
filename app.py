@@ -21,8 +21,6 @@ def afegir():
     
 #print(df.iloc[len(df)-1,1])
 
-
-
 def overlap_fecha(trip_id):
 
     overlap_list = []
@@ -57,9 +55,9 @@ def overlap_fecha(trip_id):
 
 
 # Ejemplo
-print(df.iloc[8,1])
 print(overlap_fecha(1))
 
+"""
 def ciutats(trip_id):
     
     overlap_list = []
@@ -76,9 +74,10 @@ def ciutats(trip_id):
     return overlap_list
 
 print(ciutats(0))
+"""
 
 
-def overlap_fecha(id_name):
+def overlap_fecha(trip_id):
 
     overlap_list = []
     total_overlap_list = []
@@ -87,8 +86,8 @@ def overlap_fecha(id_name):
 
         # -1 is because the index to search the names and id doesn't match
 
-        start1 = df.iloc[id_name-1,2]
-        end1 = df.iloc[id_name-1,3]
+        start1 = df.iloc[trip_id-1,2]
+        end1 = df.iloc[trip_id-1,3]
 
         start2 = df.iloc[other-1,2]
         end2 = df.iloc[other-1,3]
@@ -107,7 +106,7 @@ def overlap_fecha(id_name):
         return max(start1, start2) <= min(end1, end2), start1 == start2 and end1 == end2
     
     for i in range(1,len(df)+1):
-        if i != id_name:
+        if i != trip_id:
             parcial, total = coincide(i)
 
             if total:
@@ -119,7 +118,7 @@ def overlap_fecha(id_name):
                 
     return overlap_list, total_overlap_list
 
-def overlap_places(id_name, llista_fechas):
+def overlap_places(trip_id, llista_fechas):
 
     overlap_list = []
     total_overlap_list =  []
@@ -129,8 +128,8 @@ def overlap_places(id_name, llista_fechas):
 
     def coincide(other):
 
-        start1 = df.iloc[id_name-1,4]
-        end1 = df.iloc[id_name-1,5]
+        start1 = df.iloc[trip_id-1,4]
+        end1 = df.iloc[trip_id-1,5]
 
         start2 = df.iloc[other-1,4]
         end2 = df.iloc[other-1,5]
@@ -139,14 +138,14 @@ def overlap_places(id_name, llista_fechas):
 
 
     for i in llista_t:
-        if i != id_name:
+        if i != trip_id:
             parcial, total = coincide(i)
 
             if total:
                 total_overlap_list.append(df.iloc[i-1,0])
 
     for n in llista_p:
-        if n != id_name:
+        if n != trip_id:
             parcial, total = coincide(n)
 
             if parcial:
