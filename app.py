@@ -2,7 +2,6 @@ import pandas as pd
 from datetime import datetime
 from flask import Flask, request
 import cgitb
-from collections import deque, OrderedDict
 
 cgitb.enable()
 print("Content-type: text/html\n\n")
@@ -74,6 +73,7 @@ def overlap_fecha(trip_id):
                 
     return overlap_list, total_overlap_list
 
+
 def overlap_places(trip_id):
 
     overlap_list = []
@@ -131,25 +131,66 @@ def gustos(trip_id):
     
     return sort_coin
 
-#print(gustos(2))
 
 def presupost(trip_id):
-    presu = {key: [df.iloc[key-1,1],value, df.iloc[key-1,7], max(df.iloc[trip_id,2],df.iloc[key,2]), min(df.iloc[trip_id,3],df.iloc[key,3])] for key, value in gustos(trip_id).items()}
+    presu = {key: [df.iloc[key-1,1],value, df.iloc[key-1,7]] for key, value in gustos(trip_id).items()}
     sorted_presu = dict(sorted(presu.items(), key=lambda item: (item[1][1], -abs(item[1][2] - df.iloc[trip_id-1,7])), reverse=True))
     return sorted_presu
 
-print(presupost(2))
 
-# @app.route('/compatible', methods=['GET'])
-# def newgroup():
+def dies_coin(trip_id):
+    
+    ids_coins = overlap_places(trip_id)
+    llista_dies_coins = []
+    
+    for ids in ids_coins:
+        
+        start1 = df.iloc[trip_id-1,2]
+        end1 = df.iloc[trip_id-1,3]
 
-#     id = request.args.get("id")
-#     print(int(id))
-#     print(str(df.iloc[int(id)-1]))
-#     print(str(presupost(int(id))))
+        start2 = df.iloc[ids-1,2]
+        end2 = df.iloc[ids-1,3]
+        
+        # Convert string dates to datetime objects if inputs are strings
+        if isinstance(start1, str):
+            start1 = datetime.strptime(start1, "%d/%m/%Y")
+        if isinstance(end1, str):
+            end1 = datetime.strptime(end1, "%d/%m/%Y")
+        if isinstance(start2, str):
+            start2 = datetime.strptime(start2, "%d/%m/%Y")
+        if isinstance(end2, str):
+            end2 = datetime.strptime(end2, "%d/%m/%Y")
+        
+        if start1 >= start2:
+            if end1 <= end2:
+                llista_dies_coins.append([df.iloc[ids-1,1], start1.strftime("%d/%m/%Y"), end1.strftime("%d/%m/%Y")])
+            
+            elif end1 > end2:
+                llista_dies_coins.append([df.iloc[ids-1,1], start1.strftime("%d/%m/%Y"), end2.strftime("%d/%m/%Y")])
+            
+            
+        elif start1 < start2:
+            if end1 <= end2:
+                llista_dies_coins.append([df.iloc[ids-1,1], start2.strftime("%d/%m/%Y"), end1.strftime("%d/%m/%Y")])
+            
+            elif end1 > end2:
+                llista_dies_coins.append([df.iloc[ids-1,1], start2.strftime("%d/%m/%Y"), end2.strftime("%d/%m/%Y")])
+                
+    return llista_dies_coins
+        
+print(dies_coin(1))
 
-#     return str(presupost(int(id)))
+"""@app.route('/compatible', methods=['GET'])
+def newgroup():
+
+    id = request.args.get("id")
+    print(int(id))
+    print(str(df.iloc[int(id)-1]))
+    print(str(presupost(int(id))))
+
+    return str(presupost(int(id)))
 
 
-# if __name__ == "__main__":
-#     app.run()
+if __name__ == "__main__":
+    app.run()
+"""
