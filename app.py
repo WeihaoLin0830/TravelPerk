@@ -142,7 +142,7 @@ def presupost(trip_id):
 print(presupost(2))
         
 
-"""@app.route('/compatible', methods=['GET'])
+@app.route('/compatible', methods=['GET'])
 def newgroup():
 
     id = request.args.get("id")
@@ -153,4 +153,3 @@ def newgroup():
 
 if __name__ == "__main__":
     app.run()
-    """
