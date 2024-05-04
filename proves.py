@@ -10,13 +10,13 @@ df = pd.read_csv(file_path)
 llista_de_gustos = ["Cultura","Aire lliure","Història","Compres","Ciència","Familiar","Relax","Festa"]
 
 #holacaracola
-for i in range(len(df)):
+"""for i in range(len(df)):
     likes = []
     for nombre_de_gustos in range(len(llista_de_gustos)):
         gust_rand = random.choice(llista_de_gustos)
         if gust_rand not in likes:
             likes.append(gust_rand)
     df.iloc[i,6] = str(likes)
-    df.to_csv(file_path, index=False)
+    df.to_csv(file_path, index=False)"""
 
-print(eval(df.iloc[i,6])[1])
+print(eval(df.iloc[6,6])[2])
