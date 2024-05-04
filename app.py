@@ -1,8 +1,17 @@
 import pandas as pd
 from datetime import datetime
+from flask import Flask, request
+import cgitb
+cgitb.enable()
+print("Content-type: text/html\n\n")
+import sys
+sys.path.append('/mnt/web305/c1/31/53991431/htdocs/.local/lib/python3.8/site-packages')
+
+
+app = Flask(__name__)
 
 # Replace 'path_to_csv_file' with the actual path to your CSV file
-file_path = 'C:/Users/weiha/Documents/UPC/Programación/hackupc/hackupc-travelperk-dataset.csv'
+file_path = './hackupc-travelperk-dataset.csv'
 
 # Read the CSV file into a pandas DataFrame
 df = pd.read_csv(file_path)
@@ -121,12 +130,25 @@ def gustos(trip_id):
     
     return sort_coin
 
-print(gustos(2))
+#print(gustos(2))
 
 def presupost(trip_id):
     presu = {key: [value, df.iloc[key-1,7]] for key, value in gustos(trip_id).items()}
     sorted_presu = dict(sorted(presu.items(), key=lambda item: (item[1][0], -abs(item[1][1] - df.iloc[trip_id-1,7])), reverse=True))
     return sorted_presu
 
-print(presupost(2))
+#print(presupost(2))
         
+
+@app.route('/compatible', methods=['GET'])
+def newgroup():
+
+    id = request.args.get("id")
+    print(presupost(int(id)))
+
+    return presupost(int(id))
+
+
+if __name__ == "__main__":
+    app.run()
+    
