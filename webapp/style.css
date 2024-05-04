@@ -1,3 +1,9 @@
+/* git add * (nom arxiu)
+  git commit -m "comentari"
+
+  git push
+*/
+
 body {
     font-family: "Poppins";
 }
@@ -23,6 +29,83 @@ body {
 
 }
 
+/* Match */
+
+.boton-x {
+  width: 60px;
+  height: 60px;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  border-radius: 50%;
+  color: #fff; /* Blanco */
+  font-size: 24px;
+  font-weight: bold;
+  transition: background-color 0.3s; /* Transición para hover */
+}
+
+.boton-x::before,
+.boton-x::after {
+  content: '';
+  position: absolute;
+  width: 3px;
+  background-color: #fff;
+  height: 24px;
+  border:none;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.boton-x::before {
+  transform: translate(-50%, -50%) rotate(45deg);
+}
+
+.boton-x::after {
+  transform: translate(-50%, -50%) rotate(-45deg);
+}
+
+.boton-check {
+width: 60px;
+height: 60px;
+border: none;
+outline: none;
+cursor: pointer;
+position: relative;
+overflow: hidden;
+border-radius: 50%;
+color: #fff; /* Blanco */
+font-size: 24px;
+font-weight: bold;
+transition: background-color 0.3s; /* Transición para hover */
+}
+
+.boton-check::before,
+.boton-check::after {
+content: '';
+position: absolute;
+width: 3px; /* Ajusta el ancho del trazo */
+background-color: #fff; /* Color del trazo */
+top: 50%;
+left: 20%; /* Ajusta la posición del trazo */
+}
+
+.boton-check::before {
+height: 12px; /* Ajusta la longitud del primer trazo */
+transform: rotate(-45deg); /* Rotar para formar el primer trazo del check */
+top: 47%; /* Ajusta la posición vertical del segundo trazo */
+left: 35%;
+}
+
+.boton-check::after {
+height: 22px; /* Ajusta la longitud del segundo trazo */
+transform: rotate(45deg); /* Rotar para formar el segundo trazo del check */
+top: 33%; /* Ajusta la posición vertical del segundo trazo */
+left: 53%; /* Ajusta la posición horizontal del segundo trazo */
+}
+
 /* Location search */
 
 .city_button {
@@ -30,6 +113,11 @@ body {
   width: 100%;
 }
 
+.flag_icon {
+
+  border-radius: 10px;
+  padding-left: 5px;
+}
 
 /* Others */
 
