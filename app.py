@@ -13,7 +13,7 @@ sys.path.append('/mnt/web305/c1/31/53991431/htdocs/.local/lib/python3.8/site-pac
 app = Flask(__name__)
 
 # Replace 'path_to_csv_file' with the actual path to your CSV file
-file_path = './hackupc-travelperk-dataset.csv'
+file_path = './hackupc-travelperk-dataset-extended.csv'
 
 # Read the CSV file into a pandas DataFrame
 df = pd.read_csv(file_path)
@@ -111,44 +111,44 @@ def overlap_places(trip_id):
     
     
 def gustos(trip_id):
-    coin = OrderedDict()
+    coin = {}
     llista = overlap_places(trip_id)
     
-    for gustos in eval(df.iloc[trip_id,6]):
+    for gustos in eval(df.iloc[trip_id-1,6]):
         for j in llista:
             
             numero_conincidencias = 0
             
-            if gustos in eval(df.iloc[j,6]):
-                coin.update({j: 0})
-                for i in range(len(eval(df.iloc[trip_id,6]))):
-                    for k in range(len(eval(df.iloc[j,6]))):
-                        if eval(df.iloc[trip_id,6])[i] == eval(df.iloc[j,6])[k]:
+            if gustos in eval(df.iloc[j-1,6]):
+                for i in range(len(eval(df.iloc[trip_id-1,6]))):
+                    for k in range(len(eval(df.iloc[j-1,6]))):
+                        if eval(df.iloc[trip_id-1,6])[i] == eval(df.iloc[j-1,6])[k]:
                             numero_conincidencias += 1
                 
-                coin.update({j: numero_conincidencias})
+                coin[j] = numero_conincidencias
     
-    sort_coin = deque(sorted(coin.items(), key=lambda x: x[1]))
+    sort_coin = dict(sorted(coin.items(), key=lambda x: x[1], reverse=True))
     
     return sort_coin
 
-print(gustos(2))
+#print(gustos(2))
 
 def presupost(trip_id):
-    presu = OrderedDict({key: [df.iloc[key-1,1],value, df.iloc[key-1,7]] for key, value in gustos(trip_id)})
-    sorted_presu = deque(sorted(presu.items(), key=lambda item: (item[1][1], -abs(item[1][2] - df.iloc[trip_id-1,7]))))
+    presu = {key: [df.iloc[key-1,1],value, df.iloc[key-1,7]] for key, value in gustos(trip_id).items()}
+    sorted_presu = dict(sorted(presu.items(), key=lambda item: (item[1][1], -abs(item[1][2] - df.iloc[trip_id-1,7])), reverse=True))
     return sorted_presu
 
-print(presupost(2))
-        
+#print(presupost(2))
 
 @app.route('/compatible', methods=['GET'])
 def newgroup():
 
     id = request.args.get("id")
-    print(presupost(int(id)))
+    print(int(id))
+    print(str(df.iloc[int(id)-1]))
+    print(str(presupost(int(id))))
 
-    return presupost(int(id))
+    return str(presupost(int(id)))
 
 
 if __name__ == "__main__":
