@@ -117,13 +117,9 @@ def coincidencies_orden(trip_id):
 @app.route('/compatible', methods=['GET'])
 def newgroup():
 
-    id = request.args.get("id")
-    print(int(id))
-    print(str(df.iloc[int(id)-1]))
-    print(str(coincidencies_orden(int(id))))
-
-    return str(coincidencies_orden(int(id)))
-
+    user_id = request.args.get("id")
+    
+    return str(coincidencies_orden(int(user_id)))
 
 if __name__ == "__main__":
     app.run()
