@@ -121,4 +121,13 @@ def gustos(trip_id):
     
     return sort_coin
 
+print(gustos(2))
+
+def presupost(trip_id):
+    presu = {key: [value, df.iloc[key-1,7]] for key, value in gustos(trip_id).items()}
+    return presu
+
+print(presupost(1))
+        
+
 print(gustos(1))
