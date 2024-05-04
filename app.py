@@ -122,11 +122,11 @@ def gustos(trip_id):
     
     return sort_coin
 
-print(gustos(1))
+print(gustos(2))
 
 def presupost(trip_id):
     presu = OrderedDict({key: [df.iloc[key-1,1],value, df.iloc[key-1,7]] for key, value in gustos(trip_id)})
-    sorted_presu = deque(sorted(presu.items(), key=lambda item: (item[1][0], -abs(item[1][1] - df.iloc[trip_id-1,7]))))
+    sorted_presu = deque(sorted(presu.items(), key=lambda item: (item[1][1], -abs(item[1][2] - df.iloc[trip_id-1,7]))))
     return sorted_presu
 
 print(presupost(2))
