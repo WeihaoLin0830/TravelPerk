@@ -114,15 +114,15 @@ def gustos(trip_id):
     coin = {}
     llista = overlap_places(trip_id)
     
-    for gustos in eval(df.iloc[trip_id,6]):
+    for gustos in eval(df.iloc[trip_id-1,6]):
         for j in llista:
             
             numero_conincidencias = 0
             
-            if gustos in eval(df.iloc[j,6]):
-                for i in range(len(eval(df.iloc[trip_id,6]))):
-                    for k in range(len(eval(df.iloc[j,6]))):
-                        if eval(df.iloc[trip_id,6])[i] == eval(df.iloc[j,6])[k]:
+            if gustos in eval(df.iloc[j-1,6]):
+                for i in range(len(eval(df.iloc[trip_id-1,6]))):
+                    for k in range(len(eval(df.iloc[j-1,6]))):
+                        if eval(df.iloc[trip_id-1,6])[i] == eval(df.iloc[j-1,6])[k]:
                             numero_conincidencias += 1
                 
                 coin[j] = numero_conincidencias
