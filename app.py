@@ -15,7 +15,8 @@ def afegir():
     return_date = input("Dia de tornada(dd/mm/yyyy): ")
     departure_city = input("Ciutat de partida: ")
     arrival_city = input("Ciutat que viatge: ")
-    new_row = {'Trip ID': len(df)+1, 'Traveller Name': traveller_name, 'Departure Date': departure_date, 'Return Date': return_date, 'Departure City': departure_city, 'Arrival City': arrival_city}
+    likes = [like.strip() for like in input("Gustos (separats amb coma): ").split(',')]
+    new_row = {'Trip ID': len(df)+1, 'Traveller Name': traveller_name, 'Departure Date': departure_date, 'Return Date': return_date, 'Departure City': departure_city, 'Arrival City': arrival_city, 'Likes': likes}
     df = df._append(new_row, ignore_index=True)
     df.to_csv(file_path, index=False)
     
@@ -153,8 +154,10 @@ def overlap_places(trip_id, llista_fechas):
                 
     return overlap_list + total_overlap_list
     
-
 # Ejemplo
 print(df.iloc[0,1])
 print(overlap_fecha(1))
 print(overlap_places(1,overlap_fecha(1)))
+
+def gustos(trip_id,likes):
+    pass
