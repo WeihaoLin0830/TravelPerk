@@ -1,13 +1,18 @@
-import pandas as pd
-from datetime import datetime
-from flask import Flask, request
-import cgitb
+#!/usr/bin/python3
 
+# Initialisation on web server
+import cgitb
 cgitb.enable()
 print("Content-type: text/html\n\n")
 import sys
+sys.path.append('/mnt/web305/c1/31/53991431/htdocs/.local/lib/python3.11/site-packages/')
 sys.path.append('/mnt/web305/c1/31/53991431/htdocs/.local/lib/python3.8/site-packages')
+sys.path.append('/opt/RZpython3/lib/python3.11/site-packages')
+sys.path.append('/mnt/web305/c1/31/53991431/htdocs/.local/bin')
 
+import pandas as pd
+from datetime import datetime
+from flask import Flask, request
 
 app = Flask(__name__)
 
@@ -17,19 +22,25 @@ file_path = './hackupc-travelperk-dataset-extended.csv'
 # Read the CSV file into a pandas DataFrame
 df = pd.read_csv(file_path)
 
+
 # Display the DataFrame
-def afegir():
+# Display the DataFrame
+def afegir(traveller_name, departure_date, return_date, departure_city, arrival_city, likes, budget):
+
     global df
-    traveller_name = input("Nom: ")
-    departure_date = input("Dia de sortida (dd/mm/yyyy): ")
-    return_date = input("Dia de tornada(dd/mm/yyyy): ")
-    departure_city = input("Ciutat de partida: ")
-    arrival_city = input("Ciutat que viatge: ")
-    likes = [like.strip() for like in input("Gustos (separats amb coma): ").split(',')]
-    budget = input("El presupost que disposa: ")
-    new_row = {'Trip ID': len(df)+1, 'Traveller Name': traveller_name, 'Departure Date': departure_date, 'Return Date': return_date, 'Departure City': departure_city, 'Arrival City': arrival_city, 'Likes': likes, 'Budget': budget}
+    
+    user_id = len(df)+1
+    
+    new_row = {'Trip ID': user_id, 'Traveller Name': traveller_name, 'Departure Date': departure_date, 'Return Date': return_date, 'Departure City': departure_city, 'Arrival City': arrival_city, 'Likes': likes, 'Budget': str(budget)}
+
     df = df._append(new_row, ignore_index=True)
     df.to_csv(file_path, index=False)
+
+    return user_id
+    
+    
+
+
 
 
 def coincidencies_orden(trip_id):
@@ -114,14 +125,37 @@ def coincidencies_orden(trip_id):
     
     return sorted_presu_coin
 
-afegir()
-
 @app.route('/compatible', methods=['GET'])
 def newgroup():
 
     user_id = request.args.get("id")
     
     return str(coincidencies_orden(int(user_id)))
+
+
+@app.route('/persona', methods=['GET'])
+def persona():
+
+    traveller_name = request.args.get("traveller-name")
+    departure_date = request.args.get("departure-date")
+    return_date = request.args.get("return-date")
+    departure_city = request.args.get("departure-city")
+    arrival_city = request.args.get("arrival-city")
+    likes = request.args.get("likes")
+    likes = likes.split(",")
+    budget = int(request.args.get("budget"))
+
+    # Convertir a bon format de data departure i return time
+
+
+    # Afegir persona al database i obtenir
+    user_id = afegir(traveller_name, departure_date, return_date, departure_city, arrival_city, likes, budget)
+
+    # Llavors, cridar:
+    return str(coincidencies_orden(int(user_id)-1))
+
+
+
 
 if __name__ == "__main__":
     app.run()
