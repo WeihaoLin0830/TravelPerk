@@ -7,7 +7,7 @@
 
 function set_chat_height() {
 
-  var chat_height = screen.height - document.getElementById("bottom_bar").offsetHeight - 60;
+  var chat_height = screen.height - document.getElementById("bottom_bar").offsetHeight - 100;
 document.getElementById("chat_iframe").style.height = chat_height + "px";
 
 }
@@ -100,7 +100,7 @@ function add_interest(number) {
 
         document.getElementById("interest_" + number.toString()).style.backgroundColor = "rgb(243 244 246/var(--tw-bg-opacity))";
 
-        document.getElementById("interest_" + number.toString()).style.color = "rgb(232 74 83/var(--tw-text-opacity))";
+        document.getElementById("interest_" + number.toString()).style.color = "rgb(26 86 219/var(--tw-text-opacity))";
 
     }
 
@@ -334,11 +334,12 @@ function save_budget() {
     if (budget) {
 
         // WEB REQUEST TO FLASK
-        // Finish travel plan, send to people
 
         // Show people skeleton loader
         document.getElementById("budget_selector").style.display = "none";
         document.getElementById("loader_screen").style.display = "block";
+
+        get_people();
         
     }
 
@@ -351,22 +352,25 @@ function save_budget() {
 
 
 
+function convertToEuropeanDate(americanDate) {
+    // Split the date string into month, day, and year parts
+    var parts = americanDate.split('/');
+    
+    // Rearrange the parts to European format
+    var europeanDate = parts[1] + '/' + parts[0] + '/' + parts[2];
+    
+    return europeanDate;
+}
+
+
 
 // TINDER CARDS
 
 
-// Get name gender
-
-function create_tinder_cards(data) {
-
-var face_image_url = "https://timefactories.com/cgi-bin/catalina/internet.cgi/imagegender?name=" + tinder_name;
-
-}
-
 
 var interessos = ["Cultura","Aire lliure","Història","Compres","Ciència","Familiar","Relax","Festa"];
 
-function hola() {
+function get_people() {
 
     var interessos_selected = [];
 
@@ -376,14 +380,154 @@ function hola() {
 
     } 
 
-    console.log(interessos_selected);
+    var data_url = "https://timefactories.com/cgi-bin/hack/main.cgi/persona?traveller-name=" + user_name + "&departure-date=" + convertToEuropeanDate(date_start) + "&return-date=" + convertToEuropeanDate(date_end) + "&departure-city=" + user_location + "&arrival-city=" + trip_destination + "&likes=" + encodeURI(interessos_selected) + "&budget=" + budget;
 
-    var data_url = "https://timefactories.com/cgi-bin/hack/main.cgi/persona?traveller-name=" + user_name + "&departure-date=" + date_start + "&return-date=" + date_end + "&departure-city=" + user_location + "&arrival-city=" + trip_destination + "&likes=" + encodeURI(interessos_selected) + "&budget=" + budget;
+    fetch(data_url)
+  .then(response => {
+    if (!response.ok) {
+      throw new Error('Network response was not ok');
+    }
+    
+    return response.text(); // Parse the response body as JSON
+  })
+  .then(data => {
 
-    console.log(data_url);
+    handle_people(data);
+
+  })
+  .catch(error => {
+    console.error('There was a problem with the fetch operation:', error);
+  });
+
 
 }
 
+
+
+// HANDLE PEOPLE
+
+var datayes;
+
+function handle_people(data) {
+
+    datayes = data.toString();
+
+    var data2 = datayes.replace(/[\[\]{}]/g, '');
+
+    var persons = data2.split(":");
+
+    persons.shift();
+
+    for (let i = 0; i < persons.length; i++) {
+
+      var person = persons[i].trim().split(",");
+
+      var name = person[0].replace(/'/g, '');
+      var coincidit = "Coincidiu de " + person[3].replace(/'/g, '') + " a " + person[4].replace(/'/g, '');
+      var face_image_url = "https://timefactories.com/cgi-bin/catalina/internet.cgi/imagegender?name=" + name;
+
+      // Create the card and add it to the list
+
+      // CREATE CARDS
+
+      var card_template = `
+      <div class="tinder--card mt-7 w-80 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700" style="width: 100%;">
+
+      <div style="align-items:center; display:flex;margin-top: 40px;justify-content: center;">
+  
+      <img class="mx-2 w-40 h-40 rounded-full centrat" src="${face_image_url}" alt="Rounded avatar">
+  
+    </div>
+  
+  <div class="mt-6 flex flex-col items-center pb-10">
+      <h5 class="mb-1 text-xl font-medium text-gray-900 dark:text-white">${name}</h5>
+      <span class="text-sm text-gray-500 dark:text-gray-400">Demo user</span>
+      
+      <div class="user_interests" style="display: flex;gap: 15px;margin-top: 30px;">
+        <p class="interest_icon">🎉</p>
+        <p class="interest_icon">🎡</p>
+        <p class="interest_icon">🌞</p>
+      </div>
+      
+      <p style="font-size:18px;text-align: center;margin-top: 30px;" class="mx-4 font-normal text-gray-500 lg:text-xl dark:text-gray-400">${coincidit}</p>
+  </div>
+  
+  </div>`;
+
+  document.getElementById("tinder_cards_area").innerHTML += card_template;
+
+  }
+
+
+  document.getElementById("loader_screen").style.display = "none";
+  document.getElementById("tinder").style.display = "flex";
+
+
+  setTimeout(function() {
+
+    'use strict';
+
+    tinderContainer = document.querySelector('.tinder');
+    allCards = document.querySelectorAll('.tinder--card');
+
+    initCards();
+  
+  
+  
+  allCards.forEach(function (el) {
+    var hammertime = new Hammer(el);
+  
+    hammertime.on('pan', function (event) {
+      el.classList.add('moving');
+    });
+  
+    hammertime.on('pan', function (event) {
+      if (event.deltaX === 0) return;
+      if (event.center.x === 0 && event.center.y === 0) return;
+  
+      tinderContainer.classList.toggle('tinder_love', event.deltaX > 0);
+      tinderContainer.classList.toggle('tinder_nope', event.deltaX < 0);
+  
+      var xMulti = event.deltaX * 0.03;
+      var yMulti = event.deltaY / 80;
+      var rotate = xMulti * yMulti;
+  
+      event.target.style.transform = 'translate(' + event.deltaX + 'px, ' + event.deltaY + 'px) rotate(' + rotate + 'deg)';
+    });
+  
+    hammertime.on('panend', function (event) {
+      el.classList.remove('moving');
+      tinderContainer.classList.remove('tinder_love');
+      tinderContainer.classList.remove('tinder_nope');
+  
+      var moveOutWidth = document.body.clientWidth;
+      var keep = Math.abs(event.deltaX) < 80 || Math.abs(event.velocityX) < 0.5;
+  
+      event.target.classList.toggle('removed', !keep);
+  
+      if (keep) {
+        event.target.style.transform = '';
+      } else {
+        var endX = Math.max(Math.abs(event.velocityX) * moveOutWidth, moveOutWidth);
+        var toX = event.deltaX > 0 ? endX : -endX;
+        var endY = Math.abs(event.velocityY) * moveOutWidth;
+        var toY = event.deltaY > 0 ? endY : -endY;
+        var xMulti = event.deltaX * 0.03;
+        var yMulti = event.deltaY / 80;
+        var rotate = xMulti * yMulti;
+  
+        event.target.style.transform = 'translate(' + toX + 'px, ' + (toY + event.deltaY) + 'px) rotate(' + rotate + 'deg)';
+        initCards();
+      }
+    });
+  });
+
+  }, 500);
+
+
+
+
+}
 // DATA SENDING
 
 /*
@@ -430,6 +574,7 @@ function bottom_bar(page) {
     else if (page == "landmarks") {
 
         document.getElementById("places_recommender").style.display = "block";
+        chat_completition(trip_destination);
 
     }
 
@@ -469,6 +614,8 @@ function show_error() {
 }
 
 
+
+
 'use strict';
 
 var tinderContainer = document.querySelector('.tinder');
@@ -487,7 +634,7 @@ function initCards(card, index) {
   tinderContainer.classList.add('loaded');
 }
 
-initCards();
+
 
 allCards.forEach(function (el) {
   var hammertime = new Hammer(el);
@@ -562,3 +709,4 @@ function createButtonListener(love) {
 
 var nopeListener = createButtonListener(false);
 var loveListener = createButtonListener(true);
+

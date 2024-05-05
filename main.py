@@ -3,7 +3,6 @@
 # Initialisation on web server
 import cgitb
 cgitb.enable()
-print("Content-type: text/html\n\n")
 import sys
 sys.path.append('/mnt/web305/c1/31/53991431/htdocs/.local/lib/python3.11/site-packages/')
 sys.path.append('/mnt/web305/c1/31/53991431/htdocs/.local/lib/python3.8/site-packages')
@@ -12,7 +11,8 @@ sys.path.append('/mnt/web305/c1/31/53991431/htdocs/.local/bin')
 
 import pandas as pd
 from datetime import datetime
-from flask import Flask, request
+from flask import Flask, request, jsonify
+
 
 app = Flask(__name__)
 
@@ -33,6 +33,7 @@ def afegir(traveller_name, departure_date, return_date, departure_city, arrival_
     
     new_row = {'Trip ID': user_id, 'Traveller Name': traveller_name, 'Departure Date': departure_date, 'Return Date': return_date, 'Departure City': departure_city, 'Arrival City': arrival_city, 'Likes': likes, 'Budget': str(budget)}
 
+    # Sense barra en local, amb barra en producció
     df = df._append(new_row, ignore_index=True)
     df.to_csv(file_path, index=False)
 
@@ -122,8 +123,11 @@ def coincidencies_orden(trip_id):
     presu = {key: [df.iloc[key-1,1],value, df.iloc[key-1,7], llista_data[key-1]] for key, value, in sort_coin.items()}
     
     sorted_presu_coin = dict(sorted(presu.items(), key=lambda item: (item[1][1], -abs(item[1][2] - df.iloc[trip_id-1,7])), reverse=True))
-    
-    return sorted_presu_coin
+
+    first_10_elements = {key: value for index, (key, value) in enumerate(sorted_presu_coin.items()) if index < 10}
+
+    return first_10_elements
+
 
 @app.route('/compatible', methods=['GET'])
 def newgroup():
@@ -152,8 +156,7 @@ def persona():
     user_id = afegir(traveller_name, departure_date, return_date, departure_city, arrival_city, likes, budget)
 
     # Llavors, cridar:
-    subdiccionario = {k: v for k, v in coincidencies_orden(int(user_id)-1).items()[:15]}
-    return str(subdiccionario)
+    return str(coincidencies_orden(int(user_id)-1))
 
 
 

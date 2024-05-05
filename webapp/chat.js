@@ -1,7 +1,12 @@
 // Chat GTP place API
 // Finds places based on interests
 
-var lloc = "Berlin";
+
+var lloc_glob = "";
+
+function chat_completition(lloc) {
+
+  lloc_glob = lloc;
 
 var prompt = text = "Vull un JSON de llocs a visitar a "+lloc+" amb el format {'llocs': [ ... ]}. De cada lloc, 'nom', 'descripcio_curta', 'descripcio_llarga','preu'(integer) 'tipus ([cultura,historia,ciència,familiar,relax,festa,compres,exterior activitats])'. Vull 5 recomanacions en català.";
 
@@ -14,11 +19,9 @@ var conversation = [
     "role": "user", 
     "content": text
 }];
-
-
-function chat_completition() {
     const apiUrl = 'https://api.openai.com/v1/chat/completions';
-    const apiKey = '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';
+    // API KEY for OpenAI
+    const apiKey = '';
     const inputPrompt = "";
     fetch(apiUrl, {
         method: 'POST',
@@ -42,7 +45,7 @@ function chat_completition() {
     }).catch(error => {
         console.error('Error:', error);
     });
-    }
+}
 
 
     var places = "";
@@ -64,7 +67,7 @@ function chat_completition() {
             var preu = place["preu"];
 
             // Using the image API that we just developed!
-            var image_url = "https://timefactories.com/cgi-bin/catalina/internet.cgi/imagefile?query=" + lloc + " " + name;
+            var image_url = "https://timefactories.com/cgi-bin/catalina/internet.cgi/imagefile?query=" + lloc_glob + " " + name;
 
             // Array with all categories that apply
             var tipus = place["tipus"];
