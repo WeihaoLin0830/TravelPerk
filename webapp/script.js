@@ -100,7 +100,7 @@ function add_interest(number) {
 
         document.getElementById("interest_" + number.toString()).style.backgroundColor = "rgb(243 244 246/var(--tw-bg-opacity))";
 
-        document.getElementById("interest_" + number.toString()).style.color = "rgb(26 86 219/var(--tw-text-opacity))";
+        document.getElementById("interest_" + number.toString()).style.color = "rgb(232 74 83/var(--tw-text-opacity))";
 
     }
 
