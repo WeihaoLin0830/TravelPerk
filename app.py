@@ -114,6 +114,8 @@ def coincidencies_orden(trip_id):
     
     return sorted_presu_coin
 
+afegir()
+
 @app.route('/compatible', methods=['GET'])
 def newgroup():
 

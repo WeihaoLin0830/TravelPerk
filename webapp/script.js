@@ -350,6 +350,40 @@ function save_budget() {
 }
 
 
+
+
+// TINDER CARDS
+
+
+// Get name gender
+
+function create_tinder_cards(data) {
+
+var face_image_url = "https://timefactories.com/cgi-bin/catalina/internet.cgi/imagegender?name=" + tinder_name;
+
+}
+
+
+var interessos = ["Cultura","Aire lliure","Història","Compres","Ciència","Familiar","Relax","Festa"];
+
+function hola() {
+
+    var interessos_selected = [];
+
+    for (var item in selected_interests){
+        
+        interessos_selected.push(interessos[item]);
+
+    } 
+
+    console.log(interessos_selected);
+
+    var data_url = "https://timefactories.com/cgi-bin/hack/main.cgi/persona?traveller-name=" + user_name + "&departure-date=" + date_start + "&return-date=" + date_end + "&departure-city=" + user_location + "&arrival-city=" + trip_destination + "&likes=" + encodeURI(interessos_selected) + "&budget=" + budget;
+
+    console.log(data_url);
+
+}
+
 // DATA SENDING
 
 /*
