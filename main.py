@@ -152,7 +152,8 @@ def persona():
     user_id = afegir(traveller_name, departure_date, return_date, departure_city, arrival_city, likes, budget)
 
     # Llavors, cridar:
-    return str(coincidencies_orden(int(user_id)-1))
+    subdiccionario = {k: v for k, v in coincidencies_orden(int(user_id)-1).items()[:15]}
+    return str(subdiccionario)
 
 
 
