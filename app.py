@@ -32,7 +32,7 @@ def afegir():
     df.to_csv(file_path, index=False)
 
 
-def coincidencies_orden(trip_id):
+def llista_coincidencies(trip_id):
 
     start1 = df.iloc[trip_id-1,2]
     end1 = df.iloc[trip_id-1,3]
@@ -48,39 +48,40 @@ def coincidencies_orden(trip_id):
         desti2 = df.iloc[other-1,5]
 
         if sortida1 == sortida2:
-            return False, [] 
+            return False, []
         else:
             if max(start1, start2) <= min(end1, end2):
                 if desti1==desti2:
-                    return True, [max(start1, start2),min(end1, end2)]
+                    return True, [max(start1, start2),min(end1, end2)]##
                 else:
                     if desti1==sortida2:
                         if start1 < start2 or end1 > end2:
-                            return True, [max(start1, start2),min(end1, end2)]
+                            return True, [max(start1, start2),min(end1, end2)] ##
                         else:
-                            return False, [] 
+                            return False, []
 
                     elif desti2==sortida1:
                         if start1 > start2 or end1 < end2:
-                            return True, [max(start1, start2),min(end1, end2)]
+                            return False, []
                         else:
-                            return False, [] 
+                            return False, []
                            
                     else:
-                        return False, [] 
+                        return False, []
                     
             else:
                 if sortida1==desti2:
-                    return True, [start2, end2]
+                    return False, []
                 
                 elif desti1==sortida2:
-                    return True, [start1,end1]
+                    return True, [start1,end1] ##
                 
                 else:
-                    return False, []  
+                    return False, [] 
     
     llista = []
     llista_data = {}
+    si_local = {}
 
     for i in range(1,len(df)+1):
         if i != trip_id:
@@ -90,6 +91,7 @@ def coincidencies_orden(trip_id):
             if indicador:
                 llista.append(df.iloc[i-1,0])
                 llista_data[i-1]=data
+                
 
     coin = {}
     
@@ -105,23 +107,24 @@ def coincidencies_orden(trip_id):
                             numero_conincidencias += 1
                 
                 coin[j] = numero_conincidencias
-    
+     
     sort_coin = dict(sorted(coin.items(), key=lambda x: x[1], reverse=True))
 
     presu = {key: [df.iloc[key-1,1],value, df.iloc[key-1,7], llista_data[key-1]] for key, value, in sort_coin.items()}
-    
-    sorted_presu_coin = dict(sorted(presu.items(), key=lambda item: (item[1][1], -abs(item[1][2] - df.iloc[trip_id-1,7])), reverse=True))
-    
-    return sorted_presu_coin
+    sorted_presu = dict(sorted(presu.items(), key=lambda item: (item[1][1], abs(item[1][2] - df.iloc[trip_id-1,7])),reverse=True)) 
 
-afegir()
 
-@app.route('/compatible', methods=['GET'])
+    return sorted_presu
+
+print(llista_coincidencies(1))
+
+"""@app.route('/compatible', methods=['GET'])
 def newgroup():
 
     user_id = request.args.get("id")
     
-    return str(coincidencies_orden(int(user_id)))
+    return str(llista_coincidencies(int(user_id),False))
 
 if __name__ == "__main__":
     app.run()
+"""
