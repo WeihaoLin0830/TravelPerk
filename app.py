@@ -52,36 +52,24 @@ def llista_coincidencies(trip_id):
         else:
             if max(start1, start2) <= min(end1, end2):
                 if desti1==desti2:
-                    return True, [max(start1, start2),min(end1, end2)]##
+                    return True, [max(start1, start2),min(end1, end2)]
                 else:
-                    if desti1==sortida2:
-                        if start1 < start2 or end1 > end2:
-                            return True, [max(start1, start2),min(end1, end2)] ##
-                        else:
-                            return False, []
-
-                    elif desti2==sortida1:
-                        if start1 > start2 or end1 < end2:
-                            return False, []
-                        else:
-                            return False, []
-                           
+                    if desti1==sortida2 and (start1 < start2 or end1 > end2):
+                        return True, [max(start1, start2),min(end1, end2)]
+                    elif desti2==sortida1 and (start1 > start2 or end1 < end2):
+                        return False, []
                     else:
                         return False, []
-                    
             else:
                 if sortida1==desti2:
                     return False, []
-                
                 elif desti1==sortida2:
-                    return True, [start1,end1] ##
-                
+                    return True, [start1,end1]
                 else:
-                    return False, [] 
+                    return False, []
     
     llista = []
     llista_data = {}
-    si_local = {}
 
     for i in range(1,len(df)+1):
         if i != trip_id:
